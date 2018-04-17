@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a href="/"><button type="button" name="button">Search again</button></a>
+      <h2>Morning: </h2>
+      {% if ride.morning %}
+        Morning ride looks good!
+      {% else %}
+        Too windy in the morning.
+      {% endif %}
+
+      <h2>Evening: </h2>
+      {% if ride.evening %}
+        Evening ride looks good!
+      {% else %}
+        Too windy in evening.
+      {% endif %}
+
+{% endblock %}

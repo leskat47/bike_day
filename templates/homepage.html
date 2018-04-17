@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="jumbotron">
+      <h2>Should I bike today?</h2>
+      <form id="search" action="/get-weather">
+        <p>Morning commute time</p>
+        <select name="morning">
+          <option value="4">4:00 am</option>
+          <option value="5">5:00 am</option>
+          <option value="6">6:00 am</option>
+          <option value="7">7:00 am</option>
+          <option value="8">8:00 am</option>
+          <option value="9" default>9:00 am</option>
+          <option value="10">10:00 am</option>
+          <option value="11">11:00 am</option>
+          <option value="12">Noon</option>
+        </select>
+        <p>Evening commute</p>
+        <select name="evening">
+          <option value="3">3:00 pm</option>
+          <option value="4">4:00 pm</option>
+          <option value="5">5:00 pm</option>
+          <option value="6" default>6:00 pm</option>
+          <option value="7">7:00 pm</option>
+          <option value="8">8:00 pm</option>
+          <option value="9">9:00 pm</option>
+          <option value="10">10:00 pm</option>
+          <option value="11">11:00 pm</option>
+          <option value="12">Noon</option>
+        </select>
+
+        <input type="text" id="lat" name="lat" hidden>
+        <input type="text" id="lon" name="lon" hidden>
+
+        <button type="submit" name="button">Submit</button>
+      </form>
+
+
+    </div>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript">
+    function getLocation() {
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        $("#lat").val("37.7749");
+        $("#lon").val("22.4194");
+      }
+    }
+    function showPosition(position) {
+        $("#lat").val(position.coords.latitude);
+        $("#lon").val(position.coords.longitude);
+    }
+    getLocation();
+    // $("#search").on("submit", function(evt){
+    //   evt.preventDefault()
+    //   if ($("#lat").val() && $("#lon").val()) {
+    //     $("#search").submit()
+    //   }
+    //   else {
+    //     alert("No position values")
+    //   }
+    // })
+    </script>
+
+{% endblock %}
