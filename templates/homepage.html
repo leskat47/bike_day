@@ -1,43 +1,48 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="jumbotron">
-      <h2>Should I bike today?</h2>
-      <form id="search" action="/get-weather">
-        <p>Morning commute time</p>
-        <select name="morning">
-          <option value="4">4:00 am</option>
-          <option value="5">5:00 am</option>
-          <option value="6">6:00 am</option>
-          <option value="7">7:00 am</option>
-          <option value="8">8:00 am</option>
-          <option value="9" default>9:00 am</option>
-          <option value="10">10:00 am</option>
-          <option value="11">11:00 am</option>
-          <option value="12">Noon</option>
-        </select>
-        <p>Evening commute</p>
-        <select name="evening">
-          <option value="3">3:00 pm</option>
-          <option value="4">4:00 pm</option>
-          <option value="5">5:00 pm</option>
-          <option value="6" default>6:00 pm</option>
-          <option value="7">7:00 pm</option>
-          <option value="8">8:00 pm</option>
-          <option value="9">9:00 pm</option>
-          <option value="10">10:00 pm</option>
-          <option value="11">11:00 pm</option>
-          <option value="12">Noon</option>
-        </select>
+<h2 class="lead">Should I bike today?</h2>
+    <div class="row text-center">
 
+    </div>
+    <form id="search" action="/get-weather">
+    <div class="row">
+        <div class="col-4 offset-2">
+          <p>Morning commute time</p>
+          <select name="morning" class="form-control">
+            <option value="4">4:00 am</option>
+            <option value="5">5:00 am</option>
+            <option value="6">6:00 am</option>
+            <option value="7">7:00 am</option>
+            <option value="8">8:00 am</option>
+            <option value="9" selected="selected">9:00 am</option>
+            <option value="10">10:00 am</option>
+            <option value="11">11:00 am</option>
+            <option value="12">Noon</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <p>Evening commute</p>
+          <select name="evening" class="form-control">
+            <option value="3">3:00 pm</option>
+            <option value="4">4:00 pm</option>
+            <option value="5">5:00 pm</option>
+            <option value="6" selected="selected">6:00 pm</option>
+            <option value="7">7:00 pm</option>
+            <option value="8">8:00 pm</option>
+            <option value="9">9:00 pm</option>
+            <option value="10">10:00 pm</option>
+            <option value="11">11:00 pm</option>
+            <option value="12">Noon</option>
+          </select>
+        </div>
+      </div>
         <input type="text" id="lat" name="lat" hidden>
         <input type="text" id="lon" name="lon" hidden>
 
-        <button type="submit" name="button">Submit</button>
-      </form>
+        <button type="submit" class="btn btn-primary" name="button">Submit</button>
 
-
-    </div>
+  </form>
     <script
         src="https://code.jquery.com/jquery-3.3.1.js"
         integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -57,6 +62,7 @@
         $("#lon").val(position.coords.longitude);
     }
     getLocation();
+    console.log("lat")
     // $("#search").on("submit", function(evt){
     //   evt.preventDefault()
     //   if ($("#lat").val() && $("#lon").val()) {

@@ -2,11 +2,18 @@
 
 {% block content %}
 
-    <a href="/"><button type="button" name="button">Search again</button></a>
+      <a href="/"><button class="btn btn-primary" type="button" name="button">Search again</button></a>
+    <div class="row">
+      <div class="col">
+
       <h2>Morning: </h2>
         {{ morning.recommendation() }}
+      </div>
+      <div class="col">
 
-      <h2>Evening: </h2>
-        {{ evening.recommendation() }}
+        <h2>Evening: </h2>
+          {{ evening.recommendation() }}
+      </div>
+    </div>
 
 {% endblock %}
