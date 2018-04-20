@@ -2,6 +2,18 @@ body {
   background-color: lightblue;
 }
 
+button.btn {
+  margin: 20px;
+}
+
+h1, h3 {
+  font-family: 'Pacifico', cursive;
+}
+
+.lead {
+  padding-top: 10px;
+}
+
 .jumbotron {
   text-align: center;
   align-items: center;
@@ -11,7 +23,25 @@ body {
   padding-bottom: 20px;
   text-align: center;
 }
+
 .content-block {
   display: inline-block;
   padding: 20px;
+}
+
+.col-md>div {
+  border: solid lightgrey 2px;
+  width: 75%;
+  margin: auto;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.sun {
+  background-color: lightgoldenrodyellow;
+}
+
+.dark {
+  background-color: darkblue;
+  color: white;
 }

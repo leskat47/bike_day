@@ -1,18 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-      <a href="/"><button class="btn btn-primary" type="button" name="button">Search again</button></a>
+  <a href="/"><button class="btn btn-primary" type="button" name="button">Search again</button></a>
     <div class="row">
-      <div class="col">
-
-      <h2>Morning: </h2>
-        {{ morning.recommendation() }}
+      <div class="col-xs-12 col-md">
+      {% if morning['recommended'] %}
+        <div class="sun">
+      {% else %}
+        <div class="dark">
+      {% endif %}
+          <h3>Morning: </h3>
+          {% if not morning['recommended'] %}
+            <p>{{ morning['rain'] }}</p>
+            <p>{{ morning['wind'] }}</p>
+          {% else %}
+            <p>{{ morning['rain'] }}</p>
+          {% endif %}
+        </div>
       </div>
-      <div class="col">
-
-        <h2>Evening: </h2>
-          {{ evening.recommendation() }}
+      <div class="col-xs-12 col-md">
+        {% if evening['recommended'] %}
+          <div class="sun">
+        {% else %}
+          <div class="dark">
+        {% endif %}
+          <h3>Evening: </h3>
+          {% if not evening['recommended'] %}
+            <p>{{ evening['rain'] }}</p>
+            <p>{{ evening['wind'] }}</p>
+          {% else %}
+            <p>{{ evening['rain'] }}</p>
+          {% endif %}
+      </div>
       </div>
     </div>
 

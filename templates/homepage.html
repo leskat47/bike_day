@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2 class="lead">Should I bike today?</h2>
-    <div class="row text-center">
-
+    <div class="text-center">
+      <h2 class="lead">Should I bike today?</h2>
     </div>
     <form id="search" action="/get-weather">
     <div class="row">
-        <div class="col-4 offset-2">
-          <p>Morning commute time</p>
+        <div class="col-xs-12 col-md-4 offset-md-2">
+          <h3>Morning commute time</h3>
           <select name="morning" class="form-control">
             <option value="4">4:00 am</option>
             <option value="5">5:00 am</option>
@@ -21,8 +20,8 @@
             <option value="12">Noon</option>
           </select>
         </div>
-        <div class="col-4">
-          <p>Evening commute</p>
+        <div class="col-xs-12 col-md-4">
+          <h3>Evening commute</h3>
           <select name="evening" class="form-control">
             <option value="3">3:00 pm</option>
             <option value="4">4:00 pm</option>
@@ -39,8 +38,8 @@
       </div>
         <input type="text" id="lat" name="lat" hidden>
         <input type="text" id="lon" name="lon" hidden>
-
-        <button type="submit" class="btn btn-primary" name="button">Submit</button>
+        <p class="waiting">Getting your location...</p>
+        <button type="submit" class="btn btn-primary" name="button" disabled>Submit</button>
 
   </form>
     <script
@@ -54,15 +53,19 @@
           navigator.geolocation.getCurrentPosition(showPosition);
       } else {
         $("#lat").val("37.7749");
-        $("#lon").val("22.4194");
+        $("#lon").val("-122.4194");
+        $("button[type='submit']").removeAttr('disabled')
       }
     }
     function showPosition(position) {
         $("#lat").val(position.coords.latitude);
         $("#lon").val(position.coords.longitude);
+        $('.waiting').remove()
+        $("button[type='submit']").removeAttr('disabled')
     }
     getLocation();
-    console.log("lat")
+
+
     // $("#search").on("submit", function(evt){
     //   evt.preventDefault()
     //   if ($("#lat").val() && $("#lon").val()) {
