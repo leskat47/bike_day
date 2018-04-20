@@ -31,20 +31,22 @@ class Commute(object):
         """ Get today's weather info from Dark Sky API """
 
         day = time.mktime(datetime.today().timetuple())
-
+        base_url = "https://api.darksky.net/forecast/"
         # check cache
         if day in cache:
             print "FOUND IN CACHE"
             return cache[day]
 
         # ping API for today's weather
-        url = "https://api.darksky.net/forecast/{key}/{lat},{lon},{time}".format(key=DARK_SKY_KEY,
-                                                                                 lat=self.lat,
-                                                                                 lon=self.lng,
-                                                                                 time=self.hour)
+        url = "{url}{key}/{lat},{lon},{time}".format(url=base_url,
+                                                          key=DARK_SKY_KEY,
+                                                          lat=self.lat,
+                                                          lon=self.lng,
+                                                          time=self.hour)
         response = requests.get(url)
         data = json.loads(response.text)
         cache[day] = data["hourly"]["data"]
+
         return data["hourly"]["data"]
 
     def set_weather(self):
@@ -60,10 +62,23 @@ class Commute(object):
         return
 
     def recommendation(self):
-        print self.wind
-        if self.wind > 16:
-            return "Not a good ride: too windy!"
-        return "Looks good!"
+        rec = {'recommended': True}
+        if self.rain_probability > 40:
+            if self.rain_intensity > 0.3:
+                rec['recommended'] = False
+                rec['rain'] = "Heavy rain today"
+            elif self.rain_intensity > 0.1:
+                rec['rain'] = "Bring a rain jacket!"
+            else:
+                rec['rain'] = "Drizzle likely"
+        else:
+            rec['rain'] = "Little to no rain expected"
+
+        if self.wind > 13:
+            rec['recommended'] = False
+            rec['wind'] = "Not a good ride: too windy!"
+
+        return rec
 
 
 class MorningCommute(Commute):
